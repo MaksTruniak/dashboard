@@ -5,7 +5,7 @@ import {peopleEnum} from "~/enums/peopleEnum";
 import {statusEnum} from "~/enums/statusEnum";
 import {priorityEnum} from "~/enums/priorityEnum";
 import {type Card} from '@/types/card'
-import { generateUUID } from '@/utils/uuid';
+import {generateUUID} from '@/utils/uuid';
 
 const cardsStore = useCardStore();
 const props = defineProps(['data'])
@@ -51,7 +51,7 @@ const updateStatus = () => {
 updateStatus()
 
 const saveTask = () => {
-  const id = ref( props.data.edit ? idTask : taskId)
+  const id = ref(props.data.edit ? idTask : taskId)
   let data: Card = {
     id: id,
     titleTask: title.value,
@@ -64,6 +64,11 @@ const saveTask = () => {
   cardsStore.setData(data);
   onClose()
 };
+
+const deleteTask = () => {
+  cardsStore.deleteData(idTask)
+  onClose()
+}
 </script>
 
 <template>
@@ -88,6 +93,8 @@ const saveTask = () => {
         <USelectMenu v-model="selectedStatus" placeholder="Status" :options="statusesStatic"
                      option-attribute="title"/>
         <USelectMenu v-model="selectedPriority" placeholder="Priority" :options="priority"/>
+      </div>
+      <div class="flex justify-between mt-4">
         <UButton
             :icon="props.data.edit ? 'i-heroicons-pencil' : 'i-heroicons-plus'"
             size="sm"
@@ -97,6 +104,16 @@ const saveTask = () => {
             variant="solid"
             class="pr-3"
             @click="saveTask()"
+        />
+        <UButton v-if="props.data.edit"
+                 icon="i-heroicons-trash"
+                 size="sm"
+                 color="red"
+                 label="Delete a card"
+                 square
+                 variant="solid"
+                 class="pr-3"
+                 @click="deleteTask()"
         />
       </div>
     </UCard>

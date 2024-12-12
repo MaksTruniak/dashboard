@@ -5,7 +5,7 @@ import { ModalCard } from '#components';
 import {statusEnum} from "~/enums/statusEnum";
 import draggable from 'vuedraggable';
 
-const props = defineProps(['columns', 'column', 'boardState']);
+const props = defineProps(['columns', 'column']);
 
 const modal = useModal();
 

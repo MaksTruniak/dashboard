@@ -16,5 +16,8 @@ export const useCardStore = defineStore('card', {
                 this.data.push(newData);
             }
         },
+        deleteData(id: any){
+            this.data = this.data.filter(item => item.id !== id.value)
+        }
     },
 });

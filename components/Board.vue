@@ -3,8 +3,8 @@ import {ref, watch} from 'vue';
 import {useCardStore} from "~/stores/useCardStore";
 import {statusEnum} from "~/enums/statusEnum";
 
-const cardsStore = useCardStore();
-const {data} = cardsStore;
+const cardStore = useCardStore();
+const {data} = storeToRefs(cardStore);
 
 
 const columns = ref(statusEnum);
